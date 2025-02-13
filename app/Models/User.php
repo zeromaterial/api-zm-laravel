@@ -17,11 +17,28 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+    protected $fillable = ['name', 'email', 'password', 'profile_image', 'role', 'isactive'];
+
+    // Relasi
+    public function testimonies()
+    {
+        return $this->hasMany(Testimony::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function articles()
+    {
+        return $this->hasMany(Article::class);
+    }
+
+    public function campaigns()
+    {
+        return $this->hasMany(Campaign::class, 'created_by_user_id');
+    }
 
     /**
      * The attributes that should be hidden for serialization.
