@@ -14,14 +14,32 @@ class CompanySeeder extends Seeder
     public function run(): void
     {
         Company::create([
-            'name' => 'Google',
-            'logo' => 'path/to/google_logo.png',
+            'name' => 'coinbase.com',
+            'logo' => 'https://www.material-tailwind.com/logos/logo-coinbase.svg',
             'quotes' => 'Innovate and inspire the world.',
         ]);
 
         Company::create([
-            'name' => 'Tokopedia',
-            'logo' => 'path/to/tokopedia_logo.png',
+            'name' => 'amazon.com',
+            'logo' => 'https://www.material-tailwind.com/logos/logo-amazon.svg',
+            'quotes' => 'Belanja lebih mudah, lebih cepat, dan lebih hemat.',
+        ]);
+
+        Company::create([
+            'name' => 'netflix.com',
+            'logo' => 'https://www.material-tailwind.com/logos/logo-netflix.svg',
+            'quotes' => 'Belanja lebih mudah, lebih cepat, dan lebih hemat.',
+        ]);
+
+        Company::create([
+            'name' => 'spotify.com',
+            'logo' => 'https://www.material-tailwind.com/logos/logo-spotify.svg',
+            'quotes' => 'Belanja lebih mudah, lebih cepat, dan lebih hemat.',
+        ]);
+
+        Company::create([
+            'name' => 'google.com',
+            'logo' => 'https://www.material-tailwind.com/logos/logo-google.svg',
             'quotes' => 'Belanja lebih mudah, lebih cepat, dan lebih hemat.',
         ]);
     }

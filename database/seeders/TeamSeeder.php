@@ -22,5 +22,20 @@ class TeamSeeder extends Seeder
             'member_name' => 'Jane Smith',
             'member_role' => 'CTO',
         ]);
+        
+        Team::create([
+            'member_name' => 'Jane Smith',
+            'member_role' => 'CTO',
+        ]);
+
+        Team::create([
+            'member_name' => 'Jane Smith',
+            'member_role' => 'CTO',
+        ]);
+
+        Team::create([
+            'member_name' => 'Jane Smith',
+            'member_role' => 'CTO',
+        ]);
     }
 }
