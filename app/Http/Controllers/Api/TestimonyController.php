@@ -14,7 +14,7 @@ class TestimonyController extends Controller
      */
     public function index()
     {
-        $testimonies = Testimony::all();
+        $testimonies = Testimony::with('user')->get();
 
         if ($testimonies->isEmpty()) {
             return response()->json([
@@ -71,7 +71,7 @@ class TestimonyController extends Controller
      */
     public function show(string $id)
     {
-        $testimony = Testimony::find($id);
+        $testimony = Testimony::with('user')->find($id);
 
         if (!$testimony) {
             return response()->json([

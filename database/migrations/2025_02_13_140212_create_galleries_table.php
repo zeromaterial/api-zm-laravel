@@ -14,8 +14,7 @@ return new class extends Migration
         Schema::create('galleries', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('campaign_id');
-            $table->string('image_path')->nullable();
-            $table->string('gallery_image')->nullable();
+            $table->string('gallery_image');
             $table->timestamps();
         });
     }

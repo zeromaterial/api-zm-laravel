@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Gallery;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class GalleryController extends Controller
 {
@@ -13,7 +15,7 @@ class GalleryController extends Controller
      */
     public function index()
     {
-        $galleries = Gallery::all();
+        $galleries = Gallery::with('campaign')->get();
 
         if ($galleries->isEmpty()) {
             return response()->json([
@@ -43,7 +45,32 @@ class GalleryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'campaign_id' => 'required|exists:campaigns,id',
+            'gallery_image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validation error',
+                'data' => $validator->errors(),
+            ], 400);
+        }
+
+        $image = $request->file('gallery_image');
+        $image->store('galleries', 'public');
+
+        $gallery = Gallery::create([
+            'campaign_id' => $request->campaign_id,
+            'gallery_image' => $image->hashName(),
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Gallery image uploaded successfully',
+            'data' => $gallery,
+        ], 201);
     }
 
     /**
@@ -51,7 +78,7 @@ class GalleryController extends Controller
      */
     public function show(string $id)
     {
-        $gallery = Gallery::find($id);
+        $gallery = Gallery::with('campaign')->find($id);
 
         if (!$gallery) {
             return response()->json([
@@ -79,16 +106,80 @@ class GalleryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Gallery $gallery)
+    public function update(Request $request, string $id)
     {
-        //
+        $gallery = Gallery::find($id);
+
+        if (!$gallery) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Gallery not found',
+                'data' => null,
+            ], 404);
+        }
+
+        $validator = Validator::make($request->all(), [
+            'campaign_id' => 'required|exists:campaigns,id',
+            'gallery_image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validation error',
+                'data' => $validator->errors(),
+            ], 422);
+        }
+
+        $data = [
+            "campaign_id" => $request->campaign_id,
+        ];
+
+        if ($request->hasFile('gallery_image')) {
+            $image = $request->file('gallery_image');
+            $image->store('galleries', 'public');
+
+            if ($gallery->gallery_image) {
+                Storage::disk('public')->delete('galleries/' . $gallery->gallery_image);
+            }
+
+            $data['gallery_image'] = $image->hashName();
+        }
+
+        $gallery->update($data);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Gallery updated successfully',
+            'data' => $gallery,
+        ]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Gallery $gallery)
+    public function destroy($id)
     {
-        //
+        $gallery = Gallery::find($id);
+
+        if (!$gallery) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Gallery item not found',
+                'data' => null,
+            ], 404);
+        }
+
+        if ($gallery->gallery_image) {
+            Storage::disk('public')->delete('galleries/' . $gallery->gallery_image);
+        }
+
+        $gallery->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Gallery item deleted successfully',
+            'data' => null,
+        ]);
     }
 }

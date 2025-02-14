@@ -15,14 +15,22 @@ class GallerySeeder extends Seeder
     {
         Gallery::create([
             'campaign_id' => 1,
-            'image_path' => 'path/to/campaign1_image1.jpg',
-            'gallery_image' => 'campaign1_image1.jpg',
+            'gallery_image' => 'alvian-hasby-3-unsplash.jpg',
         ]);
 
         Gallery::create([
             'campaign_id' => 1,
-            'image_path' => 'path/to/campaign1_image2.jpg',
-            'gallery_image' => 'campaign1_image2.jpg',
+            'gallery_image' => 'dhiemas-afif-febriyan-4-unsplash.jpg',
+        ]);
+
+        Gallery::create([
+            'campaign_id' => 1,
+            'gallery_image' => 'ocg-saving-the-ocean-2-unsplash.jpg',
+        ]);
+
+        Gallery::create([
+            'campaign_id' => 1,
+            'gallery_image' => 'refhad-1-unsplash.jpg',
         ]);
     }
 }

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Gallery extends Model
 {
-    protected $fillable = ['campaign_id', 'image_path', 'gallery_image'];
+    protected $fillable = ['campaign_id', 'gallery_image'];
 
     // Relasi
     public function campaign()

@@ -7,6 +7,8 @@ use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
+use function Pest\Laravel\get;
+
 class CommentController extends Controller
 {
     /**
@@ -14,7 +16,7 @@ class CommentController extends Controller
      */
     public function index()
     {
-        $comments = Comment::all();
+        $comments = Comment::with('campaign', 'user')->get();
 
         if ($comments->isEmpty()) {
             return response()->json([
@@ -45,7 +47,7 @@ class CommentController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'campaign_id' => 'required|exists:campaign,id',
+            'campaign_id' => 'required|exists:campaigns,id',
             'user_id' => 'required|exists:users,id',
             'comment_text' => 'required|string',
         ]);
@@ -72,7 +74,7 @@ class CommentController extends Controller
      */
     public function show(string $id)
     {
-        $comment = Comment::find($id);
+        $comment = Comment::with('campaign', 'user')->find($id);
 
         if (!$comment) {
             return response()->json([
@@ -113,10 +115,10 @@ class CommentController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'campaign_id' => 'required|exists:campaign,id',
+            'campaign_id' => 'required|exists:campaigns,id',
             'user_id' => 'required|exists:users,id',
             'comment_text' => 'required|string',
-            'comment_date' => 'required|date',
+            'comment_date' => 'nullable|date',
         ]);
 
         if ($validator->fails()) {

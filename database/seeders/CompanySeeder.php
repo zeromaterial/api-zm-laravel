@@ -22,25 +22,25 @@ class CompanySeeder extends Seeder
         Company::create([
             'name' => 'amazon.com',
             'logo' => 'https://www.material-tailwind.com/logos/logo-amazon.svg',
-            'quotes' => 'Belanja lebih mudah, lebih cepat, dan lebih hemat.',
+            'quotes' => '',
         ]);
 
         Company::create([
             'name' => 'netflix.com',
             'logo' => 'https://www.material-tailwind.com/logos/logo-netflix.svg',
-            'quotes' => 'Belanja lebih mudah, lebih cepat, dan lebih hemat.',
+            'quotes' => 'It have broadened our horizons and helped me advance my career. The community is incredibly supportive.',
         ]);
 
         Company::create([
             'name' => 'spotify.com',
             'logo' => 'https://www.material-tailwind.com/logos/logo-spotify.svg',
-            'quotes' => 'Belanja lebih mudah, lebih cepat, dan lebih hemat.',
+            'quotes' => '',
         ]);
 
         Company::create([
             'name' => 'google.com',
             'logo' => 'https://www.material-tailwind.com/logos/logo-google.svg',
-            'quotes' => 'Belanja lebih mudah, lebih cepat, dan lebih hemat.',
+            'quotes' => '',
         ]);
     }
 }

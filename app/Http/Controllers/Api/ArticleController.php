@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Article;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class ArticleController extends Controller
 {
@@ -13,7 +15,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::all();
+        $articles = Article::with('user')->get();
 
         if ($articles->isEmpty()) {
             return response()->json([
@@ -43,7 +45,36 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'article_title' => 'required|string|max:255',
+            'article_image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'article_description' => 'required|string',
+            'created_by_user_id' => 'required|exists:users,id',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validation error',
+                'data' => $validator->errors(),
+            ], 400);
+        }
+
+        $image = $request->file('article_image');
+        $image->store('articles', 'public');
+
+        $article = Article::create([
+            'article_title' => $request->article_title,
+            'article_image' => $image->hashName(),
+            'article_description' => $request->article_description,
+            'created_by_user_id' => $request->created_by_user_id,
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Article created successfully',
+            'data' => $article,
+        ], 201);
     }
 
     /**
@@ -51,7 +82,7 @@ class ArticleController extends Controller
      */
     public function show(string $id)
     {
-        $article = Article::find($id);
+        $article = Article::with('user')->find($id);
 
         if (!$article) {
             return response()->json([
@@ -79,16 +110,90 @@ class ArticleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Article $article)
+    public function update(Request $request, string $id)
     {
-        //
+        $article = Article::find($id);
+
+        if (!$article) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Article not found',
+                'data' => null,
+            ], 404);
+        }
+
+        $validator = Validator::make($request->all(), [
+            'article_title' => 'required|string|max:255',
+            'article_image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'article_description' => 'required|string',
+            'publication_date' => 'nullable|date',
+            'created_by_user_id' => 'nullable|exists:users,id',
+            'read_count' => 'nullable|integer',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validation error',
+                'data' => $validator->errors(),
+            ], 422);
+        }
+
+        $data = [
+            "article_title" => $request->article_title,
+            "article_description" => $request->article_description,
+            "publication_date" => $request->publication_date ?? now(),
+            "created_by_user_id" => $request->created_by_user_id,
+            "read_count" => $request->read_count ?? 0,
+        ];
+
+        // Upload image
+        if ($request->hasFile('article_image')) {
+            $image = $request->file('article_image');
+            $image->store('articles', 'public');
+
+            // Delete old image if exists
+            if ($article->article_image) {
+                Storage::disk('public')->delete('articles/' . $article->article_image);
+            }
+
+            $data['article_image'] = $image->hashName();
+        }
+
+        $article->update($data);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Article updated successfully',
+            'data' => $article,
+        ]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Article $article)
+    public function destroy($id)
     {
-        //
+        $article = Article::find($id);
+
+        if (!$article) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Article not found',
+                'data' => null,
+            ], 404);
+        }
+
+        if ($article->article_image) {
+            Storage::disk('public')->delete('articles/' . $article->article_image);
+        }
+
+        $article->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Article deleted successfully',
+            'data' => null,
+        ]);
     }
 }
