@@ -46,9 +46,9 @@ class TeamController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'member_name' => 'required|string|max:255',
-            'member_image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-            'member_role' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
+            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'role' => 'required|string|max:255',
         ]);
 
         if ($validator->fails()) {
@@ -59,13 +59,13 @@ class TeamController extends Controller
             ], 400);
         }
 
-        $image = $request->file('member_image');
+        $image = $request->file('image');
         $image->store('teams', 'public');
 
         $team = Team::create([
-            'member_name' => $request->member_name,
-            'member_image' => $image->hashName(),
-            'member_role' =>  $request->member_role,
+            'name' => $request->name,
+            'image' => $image->hashName(),
+            'role' =>  $request->role,
         ]);
 
         return response()->json([
@@ -121,8 +121,8 @@ class TeamController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'member_name' => 'required|string|max:255',
-            'member_image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048', // Validasi untuk gambar
+            'name' => 'required|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048', // Validasi untuk gambar
         ]);
 
         if ($validator->fails()) {
@@ -134,20 +134,20 @@ class TeamController extends Controller
         }
 
         $data = [
-            "member_name" => $request->member_name,
+            "name" => $request->name,
         ];
 
         // Handle image upload
-        if ($request->hasFile('member_image')) {
-            $image = $request->file('member_image');
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
             $image->store('teams', 'public'); // Simpan gambar ke folder 'teams' di disk 'public'
 
             // Hapus gambar lama jika ada
-            if ($team->member_image) {
-                Storage::disk('public')->delete('teams/' . $team->member_image);
+            if ($team->image) {
+                Storage::disk('public')->delete('teams/' . $team->image);
             }
 
-            $data['member_image'] = $image->hashName(); // Simpan nama file yang di-hash
+            $data['image'] = $image->hashName(); // Simpan nama file yang di-hash
         }
 
         $team->update($data); // Update data tim
@@ -174,8 +174,8 @@ class TeamController extends Controller
             ], 404);
         }
 
-        if ($team->member_image) {
-            Storage::disk('public')->delete('teams/' . $team->member_image);
+        if ($team->image) {
+            Storage::disk('public')->delete('teams/' . $team->image);
         }
 
         $team->delete();

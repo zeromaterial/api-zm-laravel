@@ -46,9 +46,9 @@ class ArticleController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'article_title' => 'required|string|max:255',
-            'article_image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-            'article_description' => 'required|string',
+            'title' => 'required|string|max:255',
+            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'description' => 'required|string',
             'created_by_user_id' => 'required|exists:users,id',
         ]);
 
@@ -60,13 +60,13 @@ class ArticleController extends Controller
             ], 400);
         }
 
-        $image = $request->file('article_image');
+        $image = $request->file('image');
         $image->store('articles', 'public');
 
         $article = Article::create([
-            'article_title' => $request->article_title,
-            'article_image' => $image->hashName(),
-            'article_description' => $request->article_description,
+            'title' => $request->title,
+            'image' => $image->hashName(),
+            'description' => $request->description,
             'created_by_user_id' => $request->created_by_user_id,
         ]);
 
@@ -123,9 +123,9 @@ class ArticleController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'article_title' => 'required|string|max:255',
-            'article_image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-            'article_description' => 'required|string',
+            'title' => 'required|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'description' => 'required|string',
             'publication_date' => 'nullable|date',
             'created_by_user_id' => 'nullable|exists:users,id',
             'read_count' => 'nullable|integer',
@@ -140,24 +140,24 @@ class ArticleController extends Controller
         }
 
         $data = [
-            "article_title" => $request->article_title,
-            "article_description" => $request->article_description,
+            "title" => $request->title,
+            "description" => $request->description,
             "publication_date" => $request->publication_date ?? now(),
             "created_by_user_id" => $request->created_by_user_id,
             "read_count" => $request->read_count ?? 0,
         ];
 
         // Upload image
-        if ($request->hasFile('article_image')) {
-            $image = $request->file('article_image');
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
             $image->store('articles', 'public');
 
             // Delete old image if exists
-            if ($article->article_image) {
-                Storage::disk('public')->delete('articles/' . $article->article_image);
+            if ($article->image) {
+                Storage::disk('public')->delete('articles/' . $article->image);
             }
 
-            $data['article_image'] = $image->hashName();
+            $data['image'] = $image->hashName();
         }
 
         $article->update($data);
@@ -184,8 +184,8 @@ class ArticleController extends Controller
             ], 404);
         }
 
-        if ($article->article_image) {
-            Storage::disk('public')->delete('articles/' . $article->article_image);
+        if ($article->image) {
+            Storage::disk('public')->delete('articles/' . $article->image);
         }
 
         $article->delete();

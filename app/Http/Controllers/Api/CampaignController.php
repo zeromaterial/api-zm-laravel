@@ -48,9 +48,9 @@ class CampaignController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'campaign_title' => 'required|string|max:255',
-            'campaign_image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-            'campaign_location' => 'required|string|max:255',
+            'title' => 'required|string|max:255',
+            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'location' => 'required|string|max:255',
             'created_by_user_id' => 'required|exists:users,id',
             'start_date' => 'required|date',
             'end_date' => 'required|date|after:start_date',
@@ -67,13 +67,13 @@ class CampaignController extends Controller
             ], 400);
         }
 
-        $image = $request->file('campaign_image');
+        $image = $request->file('image');
         $image->store('campaigns', 'public');
 
         $campaign = Campaign::create([
-            'campaign_title' => $request->campaign_title,
-            'campaign_image' => $image->hashName(),
-            'campaign_location' => $request->campaign_location,
+            'title' => $request->title,
+            'image' => $image->hashName(),
+            'location' => $request->location,
             'created_by_user_id' => $request->created_by_user_id,
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,
@@ -135,9 +135,9 @@ class CampaignController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'campaign_title' => 'required|string|max:255',
-            'campaign_image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-            'campaign_location' => 'required|string|max:255',
+            'title' => 'required|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'location' => 'required|string|max:255',
             'start_date' => 'required|date',
             'end_date' => 'required|date|after:start_date',
             'plant_type' => 'required|string|max:255',
@@ -155,8 +155,8 @@ class CampaignController extends Controller
         }
 
         $data = [
-            "campaign_title" => $request->campaign_title,
-            "campaign_location" => $request->campaign_location,
+            "title" => $request->title,
+            "location" => $request->location,
             "start_date" => $request->start_date,
             "end_date" => $request->end_date,
             "plant_type" => $request->plant_type,
@@ -166,16 +166,16 @@ class CampaignController extends Controller
         ];
 
         // Upload image
-        if ($request->hasFile('campaign_image')) {
-            $image = $request->file('campaign_image');
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
             $image->store('campaigns', 'public');
 
             // Delete old image if exists
-            if ($campaign->campaign_image) {
-                Storage::disk('public')->delete('campaigns/' . $campaign->campaign_image);
+            if ($campaign->image) {
+                Storage::disk('public')->delete('campaigns/' . $campaign->image);
             }
 
-            $data['campaign_image'] = $image->hashName();
+            $data['image'] = $image->hashName();
         }
 
         $campaign->update($data);
@@ -203,8 +203,8 @@ class CampaignController extends Controller
         }
 
         // Hapus gambar kampanye jika ada
-        if ($campaign->campaign_image) {
-            Storage::disk('public')->delete('campaigns/' . $campaign->campaign_image);
+        if ($campaign->image) {
+            Storage::disk('public')->delete('campaigns/' . $campaign->image);
         }
 
         $campaign->delete();

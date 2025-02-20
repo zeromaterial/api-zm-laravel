@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('campaigns', function (Blueprint $table) {
             $table->id();
-            $table->string('campaign_title');
-            $table->string('campaign_image')->nullable();
-            $table->string('campaign_location');
+            $table->string('title');
+            $table->string('image')->nullable();
+            $table->string('location');
             $table->unsignedBigInteger('created_by_user_id');
             $table->date('start_date');
             $table->date('end_date');

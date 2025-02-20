@@ -14,9 +14,9 @@ class CampaignSeeder extends Seeder
     public function run(): void
     {
         Campaign::create([
-            'campaign_title' => 'Peduli Ubud: Hilangnya Ekosistem Monyet',
-            'campaign_image' => 'radoslaw-prekurat-ubud-unsplash.jpg',
-            'campaign_location' => 'Jakarta, Indonesia',
+            'title' => 'Peduli Ubud: Hilangnya Ekosistem Monyet',
+            'image' => 'radoslaw-prekurat-ubud-unsplash.jpg',
+            'location' => 'Jakarta, Indonesia',
             'created_by_user_id' => 1,
             'start_date' => now(),
             'end_date' => now()->addDay(13),
@@ -27,9 +27,9 @@ class CampaignSeeder extends Seeder
         ]);
 
         Campaign::create([
-            'campaign_title' => 'Car Free Day: Jakarta Bebas Polusi',
-            'campaign_image' => 'fikri-rasyid-polusi-unsplash.jpg',
-            'campaign_location' => 'Bandung, Indonesia',
+            'title' => 'Car Free Day: Jakarta Bebas Polusi',
+            'image' => 'fikri-rasyid-polusi-unsplash.jpg',
+            'location' => 'Bandung, Indonesia',
             'created_by_user_id' => 2,
             'start_date' => now(),
             'end_date' => now()->addDay(23),
@@ -40,9 +40,9 @@ class CampaignSeeder extends Seeder
         ]);
 
         Campaign::create([
-            'campaign_title' => 'Gerakan Mangrove: Selamatkan Masa Depan',
-            'campaign_image' => 'sutirta-budiman-mangrove-unsplash.jpg',
-            'campaign_location' => 'Bandung, Indonesia',
+            'title' => 'Gerakan Mangrove: Selamatkan Masa Depan',
+            'image' => 'sutirta-budiman-mangrove-unsplash.jpg',
+            'location' => 'Bandung, Indonesia',
             'created_by_user_id' => 2,
             'start_date' => now(),
             'end_date' => now()->addDay(6),
@@ -53,9 +53,9 @@ class CampaignSeeder extends Seeder
         ]);
 
         Campaign::create([
-            'campaign_title' => 'GHxZW: 30 Days Zero Waste Challenge',
-            'campaign_image' => 'ocg-saving-the-ocean-sampah-unsplash.jpg',
-            'campaign_location' => 'Bandung, Indonesia',
+            'title' => 'GHxZW: 30 Days Zero Waste Challenge',
+            'image' => 'ocg-saving-the-ocean-sampah-unsplash.jpg',
+            'location' => 'Bandung, Indonesia',
             'created_by_user_id' => 2,
             'start_date' => now(),
             'end_date' => now()->addDay(2),

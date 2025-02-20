@@ -46,7 +46,7 @@ class TestimonyController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'user_id' => 'required|exists:users,id',
-            'testimony_quotes' => 'required|string',
+            'quotes' => 'required|string',
         ]);
 
         if ($validator->fails()) {
@@ -113,7 +113,7 @@ class TestimonyController extends Controller
 
         $validator = Validator::make($request->all(), [
             'user_id' => 'required|exists:users,id',
-            'testimony_quotes' => 'required|string',
+            'quotes' => 'required|string',
         ]);
 
         if ($validator->fails()) {

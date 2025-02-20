@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('testimonies', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->text('testimony_quotes');
+            $table->text('quotes');
             $table->timestamps();
         });
     }

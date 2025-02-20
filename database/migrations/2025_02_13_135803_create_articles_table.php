@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('articles', function (Blueprint $table) {
             $table->id();
-            $table->string('article_title');
-            $table->string('article_image')->nullable();
-            $table->text('article_description');
+            $table->string('title');
+            $table->string('image')->nullable();
+            $table->text('description');
             $table->timestamp('publication_date')->useCurrent();
             $table->unsignedBigInteger('created_by_user_id');
             $table->integer('read_count')->default(0);
