@@ -6,21 +6,32 @@ use Illuminate\Database\Eloquent\Model;
 
 class Campaign extends Model
 {
-    protected $fillable = ['title', 'image', 'location', 'created_by_user_id', 'start_date', 'end_date', 'plant_type', 'total_donation', 'total_trees_donated', 'isactive'];
+    protected $fillable = [
+        'title',
+        'image',
+        'location',
+        'created_by_user_id',
+        'start_date',
+        'end_date',
+        'plant_id',
+        'target_donation',
+        'collected_donation',
+        'total_trees_donated',
+        'isactive',
+    ];
 
-    // Relasi
     public function user()
     {
         return $this->belongsTo(User::class, 'created_by_user_id');
     }
 
-    public function galleries()
+    public function plant()
     {
-        return $this->hasMany(Gallery::class);
+        return $this->belongsTo(Plant::class);
     }
 
-    public function comments()
+    public function donations()
     {
-        return $this->hasMany(Comment::class);
+        return $this->hasMany(Donation::class);
     }
 }

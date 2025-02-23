@@ -91,4 +91,42 @@ class UserController extends Controller
     {
         //
     }
+
+    public function userShowCampaign(string $id)
+    {
+        $user = User::with('campaigns')->find($id);
+
+        if (!$user) {
+            return response()->json([
+                'success' => false,
+                'message' => 'User not found',
+                'data' => null,
+            ], 404);
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'User retrieved successfully',
+            'data' => $user,
+        ]);
+    }
+
+    public function userShowDonation(string $id)
+    {
+        $user = User::with('donations')->find($id);
+
+        if (!$user) {
+            return response()->json([
+                'success' => false,
+                'message' => 'User not found',
+                'data' => null,
+            ], 404);
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'User retrieved successfully',
+            'data' => $user,
+        ]);
+    }
 }

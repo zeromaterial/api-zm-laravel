@@ -54,7 +54,7 @@ class TestimonyController extends Controller
                 'success' => false,
                 'message' => 'Validation Error',
                 'data' => $validator->errors(),
-            ], 400);
+            ], 422);
         }
 
         $testimony = Testimony::create($request->all());

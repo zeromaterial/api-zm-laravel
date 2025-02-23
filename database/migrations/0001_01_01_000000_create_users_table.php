@@ -17,9 +17,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('profile_image')->nullable();
             $table->string('job')->nullable();
-            $table->enum('role', ['user','admin']);
+            $table->enum('role', ['superadmin', 'penggerak', 'pendukung'])->default('pendukung');
             $table->boolean('isactive')->default(false);
             $table->rememberToken();
             $table->timestamps();

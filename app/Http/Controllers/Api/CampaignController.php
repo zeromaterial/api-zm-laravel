@@ -17,7 +17,7 @@ class CampaignController extends Controller
      */
     public function index()
     {
-        $campaigns = Campaign::with('user')->get();
+        $campaigns = Campaign::with('user', 'plant', 'donations')->get();
 
         if ($campaigns->isEmpty()) {
             return response()->json([
@@ -54,9 +54,11 @@ class CampaignController extends Controller
             'created_by_user_id' => 'required|exists:users,id',
             'start_date' => 'required|date',
             'end_date' => 'required|date|after:start_date',
-            'plant_type' => 'required|string|max:255',
-            'total_donation' => 'nullable|numeric',
+            'plant_id' => 'required|exists:plants,id',
+            'target_donation' => 'required|numeric',
+            'collected_donation' => 'nullable|numeric',
             'total_trees_donated' => 'nullable|integer',
+            'isactive' => 'boolean',
         ]);
 
         if ($validator->fails()) {
@@ -77,9 +79,11 @@ class CampaignController extends Controller
             'created_by_user_id' => $request->created_by_user_id,
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,
-            'plant_type' => $request->plant_type,
-            'total_donation' => $request->total_donation ?? 0,
+            'plant_id' => $request->plant_id,
+            'target_donation' => $request->target_donation,
+            'collected_donation' => $request->collected_donation ?? 0,
             'total_trees_donated' => $request->total_trees_donated ?? 0,
+            'isactive' => $request->isactive ?? false,
         ]);
 
         return response()->json([
@@ -94,7 +98,7 @@ class CampaignController extends Controller
      */
     public function show(string $id)
     {
-        $campaign = Campaign::with('user')->find($id);
+        $campaign = Campaign::with('user', 'plant', 'donations')->find($id);
 
         if (!$campaign) {
             return response()->json([
@@ -135,12 +139,12 @@ class CampaignController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'title' => 'required|string|max:255',
+            'title' => 'nullable|string|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-            'location' => 'required|string|max:255',
-            'start_date' => 'required|date',
-            'end_date' => 'required|date|after:start_date',
-            'plant_type' => 'required|string|max:255',
+            'location' => 'nullable|string|max:255',
+            'start_date' => 'nullable|date',
+            'end_date' => 'nullable|date|after:start_date',
+            'plant_type' => 'nullable|string|max:255',
             'total_donation' => 'nullable|numeric',
             'total_trees_donated' => 'nullable|integer',
             'isactive' => 'boolean',
@@ -154,28 +158,26 @@ class CampaignController extends Controller
             ], 422);
         }
 
-        $data = [
-            "title" => $request->title,
-            "location" => $request->location,
-            "start_date" => $request->start_date,
-            "end_date" => $request->end_date,
-            "plant_type" => $request->plant_type,
-            "total_donation" => $request->total_donation ?? 0,
-            "total_trees_donated" => $request->total_trees_donated ?? 0,
-            "isactive" => $request->isactive ?? 0,
-        ];
+        $data = $request->only([
+            'title',
+            'location',
+            'start_date',
+            'end_date',
+            'plant_type',
+            'total_donation',
+            'total_trees_donated',
+            'isactive'
+        ]);
 
-        // Upload image
         if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $image->store('campaigns', 'public');
-
-            // Delete old image if exists
             if ($campaign->image) {
                 Storage::disk('public')->delete('campaigns/' . $campaign->image);
             }
 
-            $data['image'] = $image->hashName();
+            $image = $request->file('image');
+            $imagePath = $image->store('campaigns', 'public');
+
+            $data['image'] = basename($imagePath);
         }
 
         $campaign->update($data);
@@ -202,7 +204,6 @@ class CampaignController extends Controller
             ], 404);
         }
 
-        // Hapus gambar kampanye jika ada
         if ($campaign->image) {
             Storage::disk('public')->delete('campaigns/' . $campaign->image);
         }

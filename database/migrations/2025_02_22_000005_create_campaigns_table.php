@@ -16,13 +16,14 @@ return new class extends Migration
             $table->string('title');
             $table->string('image')->nullable();
             $table->string('location');
-            $table->unsignedBigInteger('created_by_user_id');
+            $table->foreignId('created_by_user_id')->constrained('users')->onDelete('cascade');
             $table->date('start_date');
             $table->date('end_date');
-            $table->string('plant_type');
-            $table->integer('total_donation')->default(0);
+            $table->foreignId('plant_id')->constrained('plants')->onDelete('cascade');
+            $table->decimal('target_donation', 10, 2)->default(0);
+            $table->decimal('collected_donation', 10, 2)->default(0);
             $table->integer('total_trees_donated')->default(0);
-            $table->boolean('isactive')->default(false);
+            $table->boolean('isactive')->default(true);
             $table->timestamps();
         });
     }

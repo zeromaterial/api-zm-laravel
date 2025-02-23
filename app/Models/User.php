@@ -18,27 +18,16 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
-    protected $fillable = ['name', 'email', 'password', 'profile_image', 'role', 'isactive'];
-
-    // Relasi
-    public function testimonies()
-    {
-        return $this->hasMany(Testimony::class);
-    }
-
-    public function comments()
-    {
-        return $this->hasMany(Comment::class);
-    }
-
-    public function articles()
-    {
-        return $this->hasMany(Article::class);
-    }
+    protected $fillable = ['name', 'email', 'password', 'role', 'isactive'];
 
     public function campaigns()
     {
         return $this->hasMany(Campaign::class, 'created_by_user_id');
+    }
+
+    public function donations()
+    {
+        return $this->hasMany(Donation::class);
     }
 
     /**
