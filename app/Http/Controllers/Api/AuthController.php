@@ -55,7 +55,11 @@ class AuthController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
+            return response()->json([
+                'success' => false,
+                'message' => 'Validation Error',
+                'data' => $validator->errors(),
+            ], 422);
         }
 
         $credentials = $request->only('email', 'password');
@@ -81,8 +85,6 @@ class AuthController extends Controller
             ], 500);
         }
     }
-
-
 
     public function logout(Request $request)
     {
