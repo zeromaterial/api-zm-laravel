@@ -24,18 +24,8 @@ class DonationTypeSeeder extends Seeder
         ]);
 
         DonationType::create([
-            'name' => 'Sarana Prasarana',
+            'name' => 'Sarpras',
             'description' => 'Sumbangan untuk pengadaan sarana dan prasarana yang diperlukan.',
-        ]);
-
-        DonationType::create([
-            'name' => 'Operasional',
-            'description' => 'Sumbangan untuk mendukung biaya operasional kegiatan.',
-        ]);
-
-        DonationType::create([
-            'name' => 'Barang',
-            'description' => 'Sumbangan berupa barang yang dapat digunakan untuk kegiatan sosial.',
         ]);
     }
 }

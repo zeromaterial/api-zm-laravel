@@ -19,7 +19,7 @@ class PaymentMethodSeeder extends Seeder
         ]);
 
         PaymentMethod::create([
-            'name' => 'E-Wallet',
+            'name' => 'Virtual Account',
             'account_number' => '0012890114',
         ]);
 

@@ -133,5 +133,4 @@ class DonationTypeController extends Controller
             'data' => null,
         ]);
     }
-
 }

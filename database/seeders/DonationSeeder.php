@@ -30,7 +30,7 @@ class DonationSeeder extends Seeder
             'donation_type_id' => 2,
             'donation_code' => 'DN-0002',
             'amount' => 200000.00,
-            'status' => 'confirmed'
+            'status' => 'failed'
         ]);
 
         Donation::create([
@@ -40,17 +40,7 @@ class DonationSeeder extends Seeder
             'donation_type_id' => 3,
             'donation_code' => 'DN-0003',
             'amount' => 300000.00,
-            'status' => 'confirmed'
-        ]);
-
-        Donation::create([
-            'campaign_id' => 4,
-            'user_id' => 3,
-            'payment_method_id' => 3,
-            'donation_type_id' => 4,
-            'donation_code' => 'DN-0004',
-            'amount' => 400000.00,
-            'status' => 'confirmed'
+            'status' => 'pending'
         ]);
     }
 }
