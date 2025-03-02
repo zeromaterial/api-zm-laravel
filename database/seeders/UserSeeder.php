@@ -82,45 +82,5 @@ class UserSeeder extends Seeder
             'role' => 'pendukung',
             'isactive' => true,
         ]);
-        User::create([
-            'name' => 'Fajar Nugraha',
-            'email' => 'fajar@example.com',
-            'password' => Hash::make('fajar123'),
-            'job' => 'Pemandu Wisata',
-            'role' => 'pendukung',
-            'isactive' => true,
-        ]);
-        User::create([
-            'name' => 'Gita Rahmawati',
-            'email' => 'gita@example.com',
-            'password' => Hash::make('gita123'),
-            'job' => 'Mahasiswa',
-            'role' => 'pendukung',
-            'isactive' => true,
-        ]);
-        User::create([
-            'name' => 'Hendra Wijaya',
-            'email' => 'hendra@example.com',
-            'password' => Hash::make('hendra123'),
-            'job' => 'Buruh Bangunan',
-            'role' => 'pendukung',
-            'isactive' => true,
-        ]);
-        User::create([
-            'name' => 'Inayah Putri',
-            'email' => 'inayah@example.com',
-            'password' => Hash::make('inayah123'),
-            'job' => 'Guru',
-            'role' => 'pendukung',
-            'isactive' => true,
-        ]);
-        User::create([
-            'name' => 'Joko Supriyanto',
-            'email' => 'joko@example.com',
-            'password' => Hash::make('joko123'),
-            'job' => 'Nelayan',
-            'role' => 'pendukung',
-            'isactive' => true,
-        ]);
     }
 }

@@ -42,25 +42,5 @@ class TestimonySeeder extends Seeder
             'user_id' => 8,
             'quotes' => 'Semoga pariwisata berkelanjutan semakin populer dan memberikan manfaat bagi masyarakat sekitar serta melestarikan alam. Mari kita nikmati keindahan alam sambil tetap bertanggung jawab.',
         ]);
-
-        Testimony::create([
-            'user_id' => 9,
-            'quotes' => 'Saya berharap penelitian tentang lingkungan semakin berkembang dan menghasilkan solusi inovatif untuk mengatasi masalah lingkungan. Mari kita dukung para ilmuwan yang berjuang untuk masa depan bumi.',
-        ]);
-
-        Testimony::create([
-            'user_id' => 10,
-            'quotes' => 'Saya ingin membuat furnitur dari kayu bekas dan limbah kayu untuk mengurangi penebangan hutan. Mari kita manfaatkan sumber daya alam secara bijak.',
-        ]);
-
-        Testimony::create([
-            'user_id' => 11,
-            'quotes' => 'Saya berharap anak-anak kita tumbuh menjadi generasi yang peduli lingkungan. Mari kita tanamkan kesadaran akan pentingnya menjaga alam sejak dini.',
-        ]);
-
-        Testimony::create([
-            'user_id' => 12,
-            'quotes' => 'Saya berharap laut kita tetap kaya akan ikan dan sumber daya laut lainnya. Mari kita bersama-sama menjaga kebersihan laut dan mengurangi penggunaan alat tangkap yang merusak.',
-        ]);
     }
 }
