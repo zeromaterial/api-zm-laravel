@@ -22,7 +22,7 @@ class CampaignSeeder extends Seeder
             'end_date' => now()->addDay(13),
             'plant_id' => 1,
             'target_donation' => 10000000.00,
-            'collected_donation' => 50000,
+            'collected_donation' => 5000000,
             'total_trees_donated' => 250,
             'isactive' => true,
         ]);
@@ -36,7 +36,7 @@ class CampaignSeeder extends Seeder
             'end_date' => now()->addDay(23),
             'plant_id' => 2,
             'target_donation' => 50000000.00,
-            'collected_donation' => 1100000,
+            'collected_donation' => 15100000,
             'total_trees_donated' => 120,
             'isactive' => true,
         ]);
