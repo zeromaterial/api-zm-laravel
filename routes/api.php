@@ -34,9 +34,11 @@ Route::middleware(['auth:api'])->group(function () {
     Route::apiResource('/donation_types', DonationTypeController::class)->only(['index', 'show']);
 
     Route::apiResource('/testimonies', TestimonyController::class)->only(['store']);
-    Route::apiResource('/campaigns', CampaignController::class)->only(['show']);
     Route::apiResource('/donations', DonationController::class)->only(['store']);
 
+    Route::middleware(['role:penggerak'])->group(function () {
+        Route::apiResource('/campaigns', CampaignController::class)->only(['store']);
+    });
 
     Route::middleware(['role:superadmin'])->group(function () {
         Route::apiResource('/users', UserController::class);
@@ -46,7 +48,7 @@ Route::middleware(['auth:api'])->group(function () {
         Route::apiResource('/donation_types', DonationTypeController::class)->only(['store', 'update', 'destroy']);
 
         Route::apiResource('/testimonies', TestimonyController::class)->only(['update', 'destroy']);
-        Route::apiResource('/campaigns', CampaignController::class)->only(['store', 'update', 'destroy']);
+        Route::apiResource('/campaigns', CampaignController::class)->only(['update', 'destroy']);
         Route::apiResource('/donations', DonationController::class)->only(['update', 'destroy']);
     });
 });
