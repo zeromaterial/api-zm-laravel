@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('job')->nullable();
             $table->enum('role', ['superadmin', 'penggerak', 'pendukung'])->default('pendukung');
-            $table->boolean('isactive')->default(false);
+            $table->boolean('isactive')->default(true);
             $table->rememberToken();
             $table->timestamps();
         });
