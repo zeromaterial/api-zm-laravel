@@ -83,7 +83,6 @@ class CampaignController extends Controller
             'target_donation' => $request->target_donation,
             'collected_donation' => $request->collected_donation ?? 0,
             'total_trees_donated' => $request->total_trees_donated ?? 0,
-            'isactive' => $request->isactive ?? false,
         ]);
 
         return response()->json([
