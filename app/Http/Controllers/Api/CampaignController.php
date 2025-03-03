@@ -144,7 +144,8 @@ class CampaignController extends Controller
             'start_date' => 'nullable|date',
             'end_date' => 'nullable|date|after:start_date',
             'plant_type' => 'nullable|string|max:255',
-            'total_donation' => 'nullable|numeric',
+            'target_donation' => 'nullable|numeric',
+            'collected_donation' => 'nullable|integer',
             'total_trees_donated' => 'nullable|integer',
             'isactive' => 'boolean',
         ]);
@@ -163,7 +164,8 @@ class CampaignController extends Controller
             'start_date',
             'end_date',
             'plant_type',
-            'total_donation',
+            'target_donation',
+            'collected_donation',
             'total_trees_donated',
             'isactive'
         ]);
