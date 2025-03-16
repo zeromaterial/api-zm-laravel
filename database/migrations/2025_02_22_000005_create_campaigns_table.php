@@ -20,8 +20,8 @@ return new class extends Migration
             $table->date('start_date');
             $table->date('end_date');
             $table->foreignId('plant_id')->constrained('plants')->onDelete('restrict');
-            $table->decimal('target_donation', 10, 2)->default(0);
-            $table->decimal('collected_donation', 10, 2)->default(0);
+            $table->decimal('target_donation', 14, 2)->default(0);
+            $table->decimal('collected_donation', 14, 2)->default(0);
             $table->integer('total_trees_donated')->default(0);
             $table->enum('status', ['active', 'inactive', 'finished'])->default('active');
             $table->timestamps();
