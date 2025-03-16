@@ -74,7 +74,7 @@ class AuthController extends Controller
 
             $user = auth()->guard('api')->user();
 
-            if ($user->is_active == 0) {
+            if ($user->isactive === 0) {
                 return response()->json([
                     'success' => false,
                     'message' => 'Your account is inactive. Please contact support.',
