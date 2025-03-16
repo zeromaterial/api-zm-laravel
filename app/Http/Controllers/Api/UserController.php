@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -81,7 +82,47 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $user = User::find($id);
+
+        if (!$user) {
+            return response()->json([
+                'success' => false,
+                'message' => 'User not found',
+                'data' => null,
+            ], 404);
+        }
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'nullable|string|max:255',
+            'email' => 'nullable|string|email|max:255',
+            'password' => 'nullable|string|min:6',
+            'role' => 'nullable|string',
+            'isactive' => 'nullable|boolean',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validation error',
+                'data' => $validator->errors(),
+            ], 422);
+        }
+
+        $data = $request->only([
+            'name',
+            'email',
+            'password',
+            'role',
+            'isactive',
+        ]);
+
+        $user->update($data);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'User updated successfully',
+            'data' => $user,
+        ]);
     }
 
     /**
