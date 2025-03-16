@@ -17,7 +17,7 @@ class Campaign extends Model
         'target_donation',
         'collected_donation',
         'total_trees_donated',
-        'isactive',
+        'status',
     ];
 
     public function user()

@@ -23,7 +23,7 @@ return new class extends Migration
             $table->decimal('target_donation', 10, 2)->default(0);
             $table->decimal('collected_donation', 10, 2)->default(0);
             $table->integer('total_trees_donated')->default(0);
-            $table->boolean('isactive')->default(true);
+            $table->enum('status', ['active', 'inactive', 'finished'])->default('active');
             $table->timestamps();
         });
     }

@@ -19,7 +19,7 @@ class DonationSeeder extends Seeder
             'payment_method_id' => 1,
             'donation_type_id' => 1,
             'donation_code' => 'DN-0001',
-            'amount' => 1000000.00,
+            'amount' => 1000000,
             'status' => 'confirmed'
         ]);
 
@@ -29,7 +29,7 @@ class DonationSeeder extends Seeder
             'payment_method_id' => 2,
             'donation_type_id' => 2,
             'donation_code' => 'DN-0002',
-            'amount' => 2000000.00,
+            'amount' => 2000000,
             'status' => 'failed'
         ]);
 
@@ -39,7 +39,7 @@ class DonationSeeder extends Seeder
             'payment_method_id' => 3,
             'donation_type_id' => 3,
             'donation_code' => 'DN-0003',
-            'amount' => 300000.00,
+            'amount' => 300000,
             'status' => 'pending'
         ]);
     }

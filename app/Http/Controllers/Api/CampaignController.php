@@ -58,7 +58,6 @@ class CampaignController extends Controller
             'target_donation' => 'required|numeric',
             'collected_donation' => 'nullable|numeric',
             'total_trees_donated' => 'nullable|integer',
-            'isactive' => 'boolean',
         ]);
 
         if ($validator->fails()) {
@@ -147,7 +146,7 @@ class CampaignController extends Controller
             'target_donation' => 'nullable|numeric',
             'collected_donation' => 'nullable|integer',
             'total_trees_donated' => 'nullable|integer',
-            'isactive' => 'boolean',
+            'status' => 'nullable|string',
         ]);
 
         if ($validator->fails()) {
@@ -167,7 +166,7 @@ class CampaignController extends Controller
             'target_donation',
             'collected_donation',
             'total_trees_donated',
-            'isactive'
+            'status'
         ]);
 
         if ($request->hasFile('image')) {

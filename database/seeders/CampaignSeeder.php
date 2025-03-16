@@ -21,10 +21,10 @@ class CampaignSeeder extends Seeder
             'start_date' => now(),
             'end_date' => now()->addDay(13),
             'plant_id' => 1,
-            'target_donation' => 10000000.00,
+            'target_donation' => 10000000,
             'collected_donation' => 5000000,
             'total_trees_donated' => 250,
-            'isactive' => true,
+            'status' => 'active',
         ]);
 
         Campaign::create([
@@ -35,10 +35,10 @@ class CampaignSeeder extends Seeder
             'start_date' => now(),
             'end_date' => now()->addDay(23),
             'plant_id' => 2,
-            'target_donation' => 50000000.00,
+            'target_donation' => 50000000,
             'collected_donation' => 15100000,
             'total_trees_donated' => 120,
-            'isactive' => true,
+            'status' => 'active',
         ]);
 
         Campaign::create([
@@ -49,10 +49,10 @@ class CampaignSeeder extends Seeder
             'start_date' => now(),
             'end_date' => now()->addDay(6),
             'plant_id' => 3,
-            'target_donation' => 50100000.00,
+            'target_donation' => 50100000,
             'collected_donation' => 43100000,
             'total_trees_donated' => 570,
-            'isactive' => true,
+            'status' => 'active',
         ]);
 
         Campaign::create([
@@ -63,10 +63,10 @@ class CampaignSeeder extends Seeder
             'start_date' => now(),
             'end_date' => now()->addDay(2),
             'plant_id' => 4,
-            'target_donation' => 22200000.00,
+            'target_donation' => 22200000,
             'collected_donation' => 12200000,
             'total_trees_donated' => 124,
-            'isactive' => true,
+            'status' => 'active',
         ]);
     }
 }
