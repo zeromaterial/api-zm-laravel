@@ -72,12 +72,20 @@ class AuthController extends Controller
                 ], 401);
             }
 
+            $user = auth()->guard('api')->user();
+
+            if ($user->is_active == 0) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Your account is inactive. Please contact support.',
+                ], 403);
+            }
+
             return response()->json([
                 'success' => true,
                 'message' => 'Login successfully!',
                 'token' => $token
             ], 200);
-
         } catch (JWTException $e) {
             return response()->json([
                 'success' => false,
