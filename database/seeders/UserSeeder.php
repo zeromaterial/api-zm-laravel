@@ -26,7 +26,7 @@ class UserSeeder extends Seeder
             'name' => 'penggerak',
             'email' => 'penggerak@example.com',
             'password' => Hash::make('penggerak123'),
-            'role' => 'penggerak',
+            'role' => 'member',
             'isactive' => false,
         ]);
 
@@ -34,7 +34,59 @@ class UserSeeder extends Seeder
             'name' => 'pendukung',
             'email' => 'pendukung@example.com',
             'password' => Hash::make('pendukung123'),
-            'role' => 'pendukung',
+            'role' => 'member',
+            'isactive' => true,
+        ]);
+
+
+
+
+
+        User::create([
+            'name' => 'Generasi Hijau',
+            'email' => 'pendukung@example.com',
+            'password' => Hash::make('pendukung123'),
+            'role' => 'member',
+            'isactive' => true,
+        ]);
+
+        User::create([
+            'name' => 'Forum Indonesia Muda',
+            'email' => 'pendukung@example.com',
+            'password' => Hash::make('pendukung123'),
+            'role' => 'member',
+            'isactive' => true,
+        ]);
+
+        User::create([
+            'name' => 'Komunitas Pensil Bambu',
+            'email' => 'pendukung@example.com',
+            'password' => Hash::make('pendukung123'),
+            'role' => 'member',
+            'isactive' => true,
+        ]);
+        
+        User::create([
+            'name' => 'Teens Go Green Indonesia',
+            'email' => 'pendukung@example.com',
+            'password' => Hash::make('pendukung123'),
+            'role' => 'member',
+            'isactive' => true,
+        ]);
+
+        User::create([
+            'name' => 'Lentera Sintas Indonesia',
+            'email' => 'pendukung@example.com',
+            'password' => Hash::make('pendukung123'),
+            'role' => 'member',
+            'isactive' => true,
+        ]);
+
+        User::create([
+            'name' => 'UNICEF Mitra Muda',
+            'email' => 'pendukung@example.com',
+            'password' => Hash::make('pendukung123'),
+            'role' => 'member',
             'isactive' => true,
         ]);
 
