@@ -44,7 +44,7 @@ class UserSeeder extends Seeder
 
         User::create([
             'name' => 'Generasi Hijau',
-            'email' => 'pendukung@example.com',
+            'email' => 'genhi@community.com',
             'password' => Hash::make('pendukung123'),
             'role' => 'member',
             'isactive' => true,
@@ -52,7 +52,7 @@ class UserSeeder extends Seeder
 
         User::create([
             'name' => 'Forum Indonesia Muda',
-            'email' => 'pendukung@example.com',
+            'email' => 'fomi@community.com',
             'password' => Hash::make('pendukung123'),
             'role' => 'member',
             'isactive' => true,
@@ -60,15 +60,15 @@ class UserSeeder extends Seeder
 
         User::create([
             'name' => 'Komunitas Pensil Bambu',
-            'email' => 'pendukung@example.com',
+            'email' => 'kpb@community.com',
             'password' => Hash::make('pendukung123'),
             'role' => 'member',
             'isactive' => true,
         ]);
-        
+
         User::create([
             'name' => 'Teens Go Green Indonesia',
-            'email' => 'pendukung@example.com',
+            'email' => 'tgi@community.com',
             'password' => Hash::make('pendukung123'),
             'role' => 'member',
             'isactive' => true,
@@ -76,7 +76,7 @@ class UserSeeder extends Seeder
 
         User::create([
             'name' => 'Lentera Sintas Indonesia',
-            'email' => 'pendukung@example.com',
+            'email' => 'lsi@community.com',
             'password' => Hash::make('pendukung123'),
             'role' => 'member',
             'isactive' => true,
@@ -84,7 +84,7 @@ class UserSeeder extends Seeder
 
         User::create([
             'name' => 'UNICEF Mitra Muda',
-            'email' => 'pendukung@example.com',
+            'email' => 'unicef@community.com',
             'password' => Hash::make('pendukung123'),
             'role' => 'member',
             'isactive' => true,
