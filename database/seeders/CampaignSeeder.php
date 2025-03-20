@@ -83,6 +83,8 @@ class CampaignSeeder extends Seeder
             'plant_id' => 5,
             'target_donation' => 15000000,
             'collected_donation' => 10000000,
+            'total_trees_donated' => 300,
+            'status' => 'active',
         ]);
 
         Campaign::create([
@@ -95,6 +97,8 @@ class CampaignSeeder extends Seeder
             'plant_id' => 2,
             'target_donation' => 20000000,
             'collected_donation' => 18000000,
+            'total_trees_donated' => 250,
+            'status' => 'active',
         ]);
 
         Campaign::create([
@@ -107,6 +111,8 @@ class CampaignSeeder extends Seeder
             'plant_id' => 1,
             'target_donation' => 8000000,
             'collected_donation' => 5000000,
+            'total_trees_donated' => 200,
+            'status' => 'active',
         ]);
 
         Campaign::create([
@@ -119,6 +125,8 @@ class CampaignSeeder extends Seeder
             'plant_id' => 3,
             'target_donation' => 12000000,
             'collected_donation' => 12000000,
+            'total_trees_donated' => 250,
+            'status' => 'active',
         ]);
 
         Campaign::create([
@@ -131,6 +139,8 @@ class CampaignSeeder extends Seeder
             'plant_id' => 4,
             'target_donation' => 10000000,
             'collected_donation' => 0,
+            'total_trees_donated' => 0,
+            'status' => 'active',
         ]);
 
         Campaign::create([
@@ -143,6 +153,8 @@ class CampaignSeeder extends Seeder
             'plant_id' => 5,
             'target_donation' => 50000000,
             'collected_donation' => 35000000,
+            'total_trees_donated' => 300,
+            'status' => 'active',
         ]);
 
         Campaign::create([
@@ -155,6 +167,8 @@ class CampaignSeeder extends Seeder
             'plant_id' => 1,
             'target_donation' => 7000000,
             'collected_donation' => 2000000,
+            'total_trees_donated' => 100,
+            'status' => 'active',
         ]);
 
         Campaign::create([
@@ -167,6 +181,8 @@ class CampaignSeeder extends Seeder
             'plant_id' => 5,
             'target_donation' => 9000000,
             'collected_donation' => 7000000,
+            'total_trees_donated' => 150,
+            'status' => 'active',
         ]);
 
         Campaign::create([
@@ -179,6 +195,8 @@ class CampaignSeeder extends Seeder
             'plant_id' => 2,
             'target_donation' => 12000000,
             'collected_donation' => 10000000,
+            'total_trees_donated' => 200,
+            'status' => 'active',
         ]);
 
         Campaign::create([
@@ -191,6 +209,8 @@ class CampaignSeeder extends Seeder
             'plant_id' => 3,
             'target_donation' => 8000000,
             'collected_donation' => 6000000,
+            'total_trees_donated' => 150,
+            'status' => 'active',
         ]);
     }
 }
